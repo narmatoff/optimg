@@ -28,7 +28,6 @@ $ npm install --global gulp-cli
 $ npm init
 ```
 
-####  Install gulp in your project devDependencies:
 #### 3. Установка gulp и плагинов.
 ```sh
 $ npm install --save-dev gulp gulp-imagemin imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo
@@ -59,7 +58,7 @@ gulp.task('default', () =>
     .pipe(gulp.dest('dist/images'))
 );
 ```
-#### 5. Поместите в папку src/images ваши картинки. Помещать можно папкой с поддиректориями и сторонними файлами(не картинками, в таком случае они будут перезалиты без изменений).
+#### 5. Поместите в папку `src/images` ваши картинки. Помещать можно папкой с поддиректориями и сторонними файлами(не картинками, в таком случае они будут перезалиты без изменений).
 
 #### 6. Запустите gulp:
 
