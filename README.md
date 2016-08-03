@@ -1,10 +1,10 @@
 # OPTIMG - Оптимизатор картинок в "один клик".
 
 __Поддерживаемые форматы: __
-*jpg
-*png
-*gif
-*svg
+* jpg
+* png
+* gif
+* svg
 
 ### Зависимости
 Перед использованием необходимо установить [node-js](http://nodejs.org/)
@@ -30,7 +30,7 @@ $ npm init
 
 #### 3. Установка gulp и плагинов.
 ```sh
-$ npm install --save-dev gulp gulp-imagemin imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo
+$ npm install --save-dev gulp gulp-imagemin imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo gulp-logger
 ```
 
 #### 4. Создайте файл `gulpfile.js` в корне:
@@ -42,19 +42,23 @@ var optipng = require('imagemin-optipng');
 var jpegtran = require('imagemin-jpegtran');
 var gifsicle = require('imagemin-gifsicle');
 var svgo = require('imagemin-svgo');
+var logger = require('gulp-logger');
 
 
 gulp.task('default', () =>
     gulp.src('src/images/**/*')
-    .pipe(imagemin(
-    	{ progressive: true },
-			[
-				imagemin.gifsicle(), 
-				imagemin.jpegtran(), 
-				imagemin.optipng(), 
-				imagemin.svgo()
-			]
-    	))
+    .pipe(logger({
+        before: 'Стартуем OPTIMG!',
+        after: 'OPTIMG завершен!',
+        // extname: '.js.gz',
+        showChange: true
+    }))
+    .pipe(imagemin({ progressive: true }, [
+        imagemin.gifsicle(),
+        imagemin.jpegtran(),
+        imagemin.optipng(),
+        imagemin.svgo()
+    ]))
     .pipe(gulp.dest('dist/images'))
 );
 ```
